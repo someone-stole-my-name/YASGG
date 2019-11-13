@@ -21,7 +21,7 @@ $ cd YASGG
 $ git clone https://github.com/someone-stole-my-name/html5up-lens.git
 ```
 
-Replace the original index.html with the templated version:
+Replace the original `index.html` with the templated version:
 
 ```shell
 $ mv template.html html5up-lens/index.html
