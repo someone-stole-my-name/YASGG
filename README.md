@@ -35,13 +35,17 @@ $ docker build -t yasgg .
 
 ### Generate the gallery
 
+Modify the `config.json` with your own settings and then:
+
 ```shell
 $ GALLERY=/home/Christian/Pictures
 $ YASGG=$(pwd)
 $ docker run --rm -v $GALLERY:/gallery -v $YASGG:/YASGG yasgg /YASGG/YASGG --pictures /gallery
 ```
 
-If using `podman` rootless container you may have to relabel. See [Release Notes 1.6.0][podman_tool_1.6.0_Release_Notes].
+`GALLERY` is the directory that contains your `*.jpg` pictures.
+
+**Note:** _If using `podman` rootless containers you may have to relabel. See [Release Notes 1.6.0][podman_tool_1.6.0_Release_Notes]._
 
 ### Preview
 
