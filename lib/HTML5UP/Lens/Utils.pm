@@ -4,7 +4,6 @@ use Moo;
 use strictures 2;
 use File::Find;
 use File::Basename;
-use Image::Magick;
 use Image::Magick::Thumbnail 0.06;
 use Data::Dumper;
 use File::Copy::Recursive qw(rcopy_glob fcopy rcopy dircopy fmove rmove dirmove);

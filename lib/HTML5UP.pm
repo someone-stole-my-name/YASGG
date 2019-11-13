@@ -1,7 +1,6 @@
 package HTML5UP;
 use Moo;
 use strictures 2;
-use Data::Dumper;
 use File::Copy::Recursive qw(dircopy);
 use CSS::Sass;
 use File::Slurp qw(write_file read_file);
