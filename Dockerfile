@@ -14,4 +14,4 @@ perl-strictures \
 perl-getopt-long \
 imagemagick
 
-RUN cpanm install CSS::Sass Template::Liquid File::JSON::Slurper && rm -fr root/.cpanm
+RUN cpanm install CSS::Sass Template::Liquid File::JSON::Slurper Image::Magick::Thumbnail && rm -fr root/.cpanm
