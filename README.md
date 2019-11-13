@@ -21,6 +21,12 @@ $ cd YASGG
 $ git clone https://github.com/someone-stole-my-name/html5up-lens.git
 ```
 
+Replace the original index.html with the templated version:
+
+```shell
+$ mv template.html html5up-lens/index.html
+```
+
 Build the image:
 
 ```shell
@@ -32,7 +38,7 @@ $ docker build -t yasgg .
 ```shell
 $ GALLERY=/home/Christian/Pictures
 $ YASGG=$(pwd)
-$ docker run --rm -v $GALLERY:/gallery -v $YASGG:/YASGG yasgg /YASGG/YASGG --pictures $GALLERY
+$ docker run --rm -v $GALLERY:/gallery -v $YASGG:/YASGG yasgg /YASGG/YASGG --pictures /gallery
 ```
 
 If using `podman` rootless container you may have to relabel. See [Release Notes 1.6.0][podman_tool_1.6.0_Release_Notes].
