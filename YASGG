@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+use Getopt::Long qw(GetOptions);
+use Cwd qw(abs_path);
+use FindBin;
+use lib abs_path("$FindBin::Bin/lib");
+use HTML5UP::Lens;
+
+my ($PICTURESFROM, $HELP);
+my $OUTPUTTO = abs_path("$FindBin::Bin/_site");
+my $CONFIGFROM = abs_path("$FindBin::Bin/config.json");
+my $TEMPLATE = abs_path("$FindBin::Bin/html5up-lens");
+GetOptions(
+	'config=s' => \$CONFIGFROM,
+	'pictures=s' => \$PICTURESFROM,
+	'out=s' => \$OUTPUTTO,
+	'help' => \$HELP) or help();
+
+$help && help();
+$PICTURESFROM || help();
+
+my $lens = HTML5UP::Lens->new(
+	ConfigFrom => $CONFIGFROM,
+	PicturesFrom => $PICTURESFROM,
+	OutputTo => $OUTPUTTO,
+	TemplateFrom => $TEMPLATE,
+);
+
+$lens->Build;
+
+sub help {
+	print "\n" . abs_path($0)." --config configfile.json --pictures /files" . "\n";
+	exit 0;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{{ site.name }}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload-0 is-preload-1 is-preload-2">
+		<!-- Main -->
+			<div id="main">
+				<!-- Header -->
+					<header id="header">
+						<h1>{{ site.name }}</h1>
+						<p>{{ site.description }}</p>
+						{% if social %}
+						<ul class="icons">
+							{% if social.twitter %}
+							<li><a href="{{ social.twitter }}" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							{% endif %}
+							{% if social.instagram %}
+							<li><a href="{{ social.instagram }}" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							{% endif %}
+							{% if social.github %}
+							<li><a href="{{ social.github }}" class="icon brands fa-github"><span class="label">Github</span></a></li>
+							{% endif %}
+							{% if social.email %}
+							<li><a href="{{ social.email }}" class="icon fa-envelope"><span class="label">Email</span></a></li>
+							{% endif %}
+						</ul>
+						{% endif %}
+					</header>
+
+				<!-- Thumbnail -->
+					<section id="thumbnails">
+						{% for item in pictures %}
+						<article>
+							<a class="thumbnail" href="images/fulls/{{ item }}"><img src="images/thumbs/{{ item }}" alt="" /></a>
+							<!-- TODO <h2>Diam tempus accumsan</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
+						</article>
+						{% endfor %}
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="copyright">
+							<li>&copy; {{ site.name }} - {{ date.currentyear }}</li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/main.js"></script>
+	</body>
+</html>

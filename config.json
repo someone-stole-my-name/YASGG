@@ -1,0 +1,12 @@
+{
+    "site": {
+        "name": "U+2764",
+        "description": "Te amo mi amor"
+    },
+    "social": {
+      "twitter": "false",
+      "instagram": "false",
+      "github": "true",
+      "email": "false"  
+    }
+}
