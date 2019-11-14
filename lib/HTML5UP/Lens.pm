@@ -25,6 +25,8 @@ has PicturesFrom => (
 
 has thumbnailsPerRow => (is => 'ro',);
 
+has Forks => ( is => 'ro' );
+
 
 sub Build {
 	my $self = shift;

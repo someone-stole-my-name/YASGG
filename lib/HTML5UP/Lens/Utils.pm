@@ -7,6 +7,7 @@ use File::Basename;
 use Image::Magick::Thumbnail 0.06;
 use Data::Dumper;
 use File::Copy::Recursive qw(rcopy_glob fcopy rcopy dircopy fmove rmove dirmove);
+use Try::Tiny;
 
 sub Copy_Pictures {
     shift;
@@ -38,7 +39,18 @@ sub Generate_Thumbnails {
     shift;
     my $self = shift; # fixme
 
-    foreach(@{$self->Config->{pictures}}) {
+	my $pm;
+	if($self->Forks > 1) {
+		try {
+			require Parallel::ForkManager;
+			Parallel::ForkManager->import();
+			my $MAX = $self->Forks;
+			$pm = Parallel::ForkManager->new( $MAX );
+		};
+	}
+
+	foreach(@{$self->Config->{pictures}}) {
+		if($pm) { my $pid = $pm->start and next; }
         my $src = Image::Magick->new;
         $src->Read($self->OutputTo ."/images/fulls/$_");
 		my ($thumb, $x, $y) = Image::Magick::Thumbnail::create(
@@ -46,7 +58,9 @@ sub Generate_Thumbnails {
 			'660x525'
 		);
 		$thumb->Write($self->OutputTo ."/images/thumbs/$_");
+		if($pm) { $pm->finish; }
 	}
+	if($pm) { $pm->wait_all_children; }
     return;
 }
 

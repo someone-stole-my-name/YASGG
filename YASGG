@@ -6,6 +6,7 @@ use lib abs_path("$FindBin::Bin/lib");
 use HTML5UP::Lens;
 
 my ($PICTURESFROM, $HELP);
+my $FORKS = 1;
 my $OUTPUTTO = abs_path("$FindBin::Bin/_site");
 my $CONFIGFROM = abs_path("$FindBin::Bin/config.json");
 my $TEMPLATE = abs_path("$FindBin::Bin/html5up-lens");
@@ -13,6 +14,7 @@ GetOptions(
 	'config=s' => \$CONFIGFROM,
 	'pictures=s' => \$PICTURESFROM,
 	'out=s' => \$OUTPUTTO,
+	'forks=i' => \$FORKS,
 	'help' => \$HELP) or help();
 
 $help && help();
@@ -23,6 +25,7 @@ my $lens = HTML5UP::Lens->new(
 	PicturesFrom => $PICTURESFROM,
 	OutputTo => $OUTPUTTO,
 	TemplateFrom => $TEMPLATE,
+	Forks => $FORKS,
 );
 
 $lens->Build;
