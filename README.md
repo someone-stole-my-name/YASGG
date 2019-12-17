@@ -59,5 +59,5 @@ $ docker run --rm -v $SITE:/usr/share/nginx/html:ro -d nginx:latest
 [html5up_website]:https://html5up.net/
 [podman_tool]:https://github.com/containers/libpod/blob/master/install.md
 [podman_tool_1.6.0_Release_Notes]:https://github.com/containers/libpod/blob/master/RELEASE_NOTES.md#160
-[lens_screenshot]:https://html5up.net/uploads/images/lens.jpg
+[lens_screenshot]:https://i.imgur.com/4dl0I8w.jpg
 [lens_template]:https://html5up.net/lens
