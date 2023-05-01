@@ -1,2 +1,2 @@
 #!include_default
-^\.share\b
+^share\b
