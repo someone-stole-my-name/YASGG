@@ -23,6 +23,7 @@ WriteMakefile(
     "CSS::Sass"               => 0,
     "ExtUtils::MakeMaker"     => 0,
     "File::ShareDir::Install" => 0,
+    "File::Copy::Recursive"   => 0,
   },
   PREREQ_PM => {
     "CSS::Sass"                => 0,
