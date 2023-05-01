@@ -23,16 +23,6 @@ my $dist_dir = dist_dir('App-yasgg');
 
 my $INDEX_TEMPLATE = "$dist_dir/template.html";
 my $TEMPLATE       = "$dist_dir/html5up-lens";
-my @SASS_FILES     = (
-  {
-    input  => 'assets/sass/main.scss',
-    output => 'assets/css/main.css',
-  },
-  {
-    input  => 'assets/sass/noscript.scss',
-    output => 'assets/css/noscript.css',
-  }
-);
 
 my ( $in, $help, $out );
 
@@ -49,26 +39,6 @@ $out || help();
 unlink $out if -e $out;    # Remove output dir if exists
 dircopy( $TEMPLATE, $out ) # Copy html5up-lens as is to output dir
   or die $!;
-
-# Remove cruft
-unlink $out . "/LICENSE.txt" if -e $out . "/LICENSE.txt";
-unlink $out . "/README.txt"  if -e $out . "/README.txt";
-unlink glob $out . "'/images/fulls/*.*'";
-unlink glob $out . "'/images/thumbs/*.*'";
-
-# Compile sass to css
-my $sass = CSS::Sass->new(
-  output_style    => SASS_STYLE_COMPRESSED,
-  source_comments => 0,
-  dont_die        => 0,
-);
-
-foreach (@SASS_FILES) {
-  my $input_sass = $out . '/' . $_->{'input'};
-  my $output_css = $out . '/' . $_->{'output'};
-  my $css        = $sass->compile_file($input_sass);
-  write_file( $output_css, $css );
-}
 
 my @input_files;
 find(

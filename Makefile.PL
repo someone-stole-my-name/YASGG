@@ -1,6 +1,21 @@
-use CSS::Sass;
 use ExtUtils::MakeMaker;
 use File::ShareDir::Install;
+use File::Copy::Recursive qw(dircopy);
+use File::Slurp           qw(write_file);
+use warnings;
+use strict;
+
+my $share_dir          = 'share';
+my $template_dir       = 'html5up-lens';
+my $template_dist_path = "$share_dir/$template_dir";
+
+unlink $template_dist_path if -e $template_dist_path;
+dircopy( $template_dir, $template_dist_path ) or die $!;
+
+# Remove cruft
+unlink glob $template_dist_path . "'/*.txt'";
+unlink glob $template_dist_path . "'/images/fulls/*.*'";
+unlink glob $template_dist_path . "'/images/thumbs/*.*'";
 
 install_share 'share';
 
@@ -20,13 +35,12 @@ WriteMakefile(
   AUTHOR         => 'Christian Segundo <christian@segundo.io>',
   LICENSE        => 'perl_5',
   BUILD_REQUIRES => {
-    "CSS::Sass"               => 0,
     "ExtUtils::MakeMaker"     => 0,
-    "File::ShareDir::Install" => 0,
     "File::Copy::Recursive"   => 0,
+    "File::ShareDir::Install" => 0,
+    "File::Slurp"             => 0,
   },
   PREREQ_PM => {
-    "CSS::Sass"                => 0,
     "File::Basename"           => 0,
     "File::Copy"               => 0,
     "File::Copy::Recursive"    => 0,
