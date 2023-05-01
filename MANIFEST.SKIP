@@ -1,7 +1,2 @@
-# Makemaker generated files and dirs.
-^MANIFEST\.
-^Makefile$
-^blib/
-^MakeMaker-\d
-
-^share$
+#!include_default
+^\.share\b
