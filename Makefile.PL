@@ -31,10 +31,10 @@ WriteMakefile(
     },
     'meta-spec' => { version => 2 },
   },
-  EXE_FILES      => ['bin/yasgg'],
-  AUTHOR         => 'Christian Segundo <christian@segundo.io>',
-  LICENSE        => 'perl_5',
-  BUILD_REQUIRES => {
+  EXE_FILES          => ['bin/yasgg'],
+  AUTHOR             => 'Christian Segundo <christian@segundo.io>',
+  LICENSE            => 'perl_5',
+  CONFIGURE_REQUIRES => {
     "ExtUtils::MakeMaker"     => 0,
     "File::Copy::Recursive"   => 0,
     "File::ShareDir::Install" => 0,
