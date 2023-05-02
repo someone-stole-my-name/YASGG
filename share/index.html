@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><TMPL_VAR NAME="site_name"></title>
+  <meta charset="UTF-8">
+  <meta name="description" content="<TMPL_VAR NAME="site_description">">
+  <meta name="author" content="<TMPL_VAR NAME="site_author"">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lightgallery.css'>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lg-zoom.css'>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.css'>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.css'>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lg-thumbnail.css'>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="header d-flex flex-column align-items-center">
+    <h1 class="display-6 mt-3 mb-0"><TMPL_VAR NAME="site_name"></h1>
+    <p class="lead mt-2 mb-4">
+    <TMPL_VAR NAME="site_description">
+    </p>
+  </div>
+  <div class="container-sm">
+    <div class="row justify-content-center">
+      <div class="col col-md-10">
+        <div class="gallery-container" id="animated-thumbnails-gallery">
+          <TMPL_LOOP NAME="pictures">
+            <a data-lg-size="<TMPL_VAR NAME="width">-<TMPL_VAR NAME="height">" class="gallery-item"
+              data-src="./images/full/<TMPL_VAR NAME="filename">">
+              <img alt="" class="img-responsive" src="./images/thumb/<TMPL_VAR NAME="filename">" />
+            </a>
+          </TMPL_LOOP>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/lightgallery.umd.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/plugins/zoom/lg-zoom.umd.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/plugins/thumbnail/lg-thumbnail.umd.js'></script>
+  <script src="./script.js"></script>
+</body>
+</html>

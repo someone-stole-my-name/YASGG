@@ -1,0 +1,84 @@
+#!/usr/bin/env perl
+use strictures 2;
+
+use File::Copy::Recursive qw(dircopy);
+use File::ShareDir        qw(dist_dir);
+use Getopt::Long::Descriptive;
+use HTML::Template;
+use Path::Tiny;
+
+use App::yasgg::Gallery;
+
+# Required since dist_dir is RO
+$File::Copy::Recursive::KeepMode = 0;
+
+our $VERSION = '1.00';
+
+my $dist_dir = dist_dir('App-yasgg');
+
+my ( $opt, $usage ) = describe_options(
+  'yasgg %o',
+  [ 'gallery|g=s',      "directory containing pictures", { required => 1 } ],
+  [ 'output|o=s',       "the output directory", { default => './yasgg-site' } ],
+  [ 'thumbnail-size',   "",                     { default => '660x525' } ],
+  [ 'site-name',        "",                     { default => 'My Gallery' } ],
+  [ 'site-description', "", { default => 'A yasgg generated gallery' } ],
+  [ 'site-author',      "", { default => 'Me' } ],
+  [],
+  [ 'help', "print usage message and exit", { shortcircuit => 1 } ],
+);
+
+print( $usage->text ), exit if $opt->help;
+
+if ( -d $opt->output ) {
+  print "$opt->{output} already exists. Continue? [y/N]\n";
+  my $ans = <STDIN>;
+  chomp $ans;
+  exit(0) unless $ans =~ /^y$/i;
+  path( $opt->output )->remove_tree;
+}
+
+dircopy( $dist_dir, $opt->output ) # Copy html template site as is to output dir
+  or die $!;
+
+foreach ( ( "$opt->{output}/images/full", "$opt->{output}/images/thumb" ) ) {
+  path($_)->mkdir;
+}
+
+my $gallery = App::yasgg::Gallery->new( dir => $opt->gallery );
+foreach my $pic ( @{ $gallery->pictures } ) {
+  my $filename             = "$pic->{filename}.$pic->{target_format}";
+  my $image_thumbnail_path = "$opt->{output}/images/thumb/$filename";
+  my $image_full_path      = "$opt->{output}/images/full/$filename";
+
+  print "Generating thumbnail $image_thumbnail_path\n";
+  $pic->write_thumbnail( $opt->{thumbnail_size}, $image_thumbnail_path );
+
+  print "Writing image $image_full_path\n";
+  $pic->write($image_full_path);
+}
+
+my @pics =
+  map { width => $_->width, height => $_->height, filename => $_->filename },
+  @{ $gallery->pictures };
+
+my $template = HTML::Template->new(
+  filename          => $dist_dir . '/index.html',
+  die_on_bad_params => 0,
+);
+$template->param(
+  site_name        => $opt->site_name,
+  site_author      => $opt->site_author,
+  site_description => $opt->site_description,
+  pictures         => [
+    map {
+      width      => $_->width,
+        height   => $_->height,
+        filename => $_->filename . "." . $_->target_format,
+    },
+    @{ $gallery->pictures }
+  ],
+);
+
+print "Writing index file $opt->{output}/index.html\n";
+path("$opt->{output}/index.html")->spew_utf8( $template->output() );

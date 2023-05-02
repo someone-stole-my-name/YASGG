@@ -1,0 +1,11 @@
+body {
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 40px;
+  min-height: 100vh;
+  color: #222;
+}
+
+.header .lead {
+  max-width: 620px;
+  padding: 2rem 0;
+}
