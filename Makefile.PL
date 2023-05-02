@@ -34,7 +34,7 @@ WriteMakefile(
     "Image::Magick::Thumbnail"  => 0.06,
     "MIME::Types"               => 0,
     "Moo"                       => 0,
-    "Path::Tiny"                => 0,
+    "Path::Tiny"                => 0.125,
     "Scalar::MoreUtils"         => 0,
     "Try::Tiny"                 => 0,
     "Types::Standard"           => 0,
